@@ -1,0 +1,108 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model UniformIssue {
+  id          String                    @id @default(cuid())
+  createdAt   DateTime                  @default(now())
+  updatedAt   DateTime                  @updatedAt
+  status      EnumUniformIssueStatus?
+  reportedBy  String?
+  assignedTo  String?
+  priority    EnumUniformIssuePriority?
+  description String?
+  uniformId   Int?
+}
+
+model DeliveryScheduleIssue {
+  id          String                             @id @default(cuid())
+  createdAt   DateTime                           @default(now())
+  updatedAt   DateTime                           @updatedAt
+  deliveryId  Int?
+  priority    EnumDeliveryScheduleIssuePriority?
+  description String?
+  reportedBy  String?
+  status      EnumDeliveryScheduleIssueStatus?
+  assignedTo  String?
+}
+
+model GoodsIssue {
+  id          String                  @id @default(cuid())
+  createdAt   DateTime                @default(now())
+  updatedAt   DateTime                @updatedAt
+  description String?
+  goodsId     Int?
+  priority    EnumGoodsIssuePriority?
+  status      EnumGoodsIssueStatus?
+  reportedBy  String?
+  assignedTo  String?
+}
+
+model OtherIssue {
+  id          String                  @id @default(cuid())
+  createdAt   DateTime                @default(now())
+  updatedAt   DateTime                @updatedAt
+  description String?
+  status      EnumOtherIssueStatus?
+  reportedBy  String?
+  assignedTo  String?
+  issueId     Int?
+  priority    EnumOtherIssuePriority?
+}
+
+model EquipmentIssue {
+  id          String                      @id @default(cuid())
+  createdAt   DateTime                    @default(now())
+  updatedAt   DateTime                    @updatedAt
+  description String?
+  reportedBy  String?
+  assignedTo  String?
+  equipmentId Int?
+  priority    EnumEquipmentIssuePriority?
+  status      EnumEquipmentIssueStatus?
+}
+
+enum EnumUniformIssueStatus {
+  Option1
+}
+
+enum EnumUniformIssuePriority {
+  Option1
+}
+
+enum EnumDeliveryScheduleIssuePriority {
+  Option1
+}
+
+enum EnumDeliveryScheduleIssueStatus {
+  Option1
+}
+
+enum EnumGoodsIssuePriority {
+  Option1
+}
+
+enum EnumGoodsIssueStatus {
+  Option1
+}
+
+enum EnumOtherIssueStatus {
+  Option1
+}
+
+enum EnumOtherIssuePriority {
+  Option1
+}
+
+enum EnumEquipmentIssuePriority {
+  Option1
+}
+
+enum EnumEquipmentIssueStatus {
+  Option1
+}
